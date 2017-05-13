@@ -3,7 +3,9 @@ package gbagretsov.ghsearch.app;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,8 +45,12 @@ public class SearchStartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_start, container, false);
+        View view = inflater.inflate(R.layout.fragment_search_start, container, false);
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(fabClickListener);
+
+        return view;
     }
 
     @Override
@@ -79,4 +85,13 @@ public class SearchStartFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
+    // Обработка нажатия на floating action button
+    private View.OnClickListener fabClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v)
+        {
+            // TODO: поиск
+            Log.d("FAB", "searchUsers check");
+        }
+    };
 }

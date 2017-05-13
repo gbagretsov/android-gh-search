@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">GitHub Search</string>
 
+    <!-- Названия закладок -->
     <string name="tab_search">Search</string>
     <string name="tab_favourite">Favourite</string>
+
+    <!-- Поиск пользователей -->
+    <string name="enter_query">Enter query</string>>
 
 </resources>
