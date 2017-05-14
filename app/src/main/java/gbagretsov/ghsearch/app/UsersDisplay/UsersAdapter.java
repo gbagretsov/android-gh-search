@@ -59,8 +59,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            avatar   = (ImageView) itemView.findViewById(R.id.user_avatar);
-            login    = (TextView)  itemView.findViewById(R.id.user_login);
+            avatar = (ImageView) itemView.findViewById(R.id.user_avatar);
+            login  = (TextView)  itemView.findViewById(R.id.user_login);
 
             // По нажатию на элемент списка вызываем экран с карточкой пользователя
             itemView.setOnClickListener(new View.OnClickListener() {

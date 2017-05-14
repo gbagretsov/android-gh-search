@@ -32,9 +32,11 @@ public class SearchResultsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<GitHubUser> users;
 
+    // Параметры пагинации
     private int currentPage = 1;
     private static final int PER_PAGE = 30;
 
+    // Параметры для бесконечной загрузки
     private boolean loadingInProgress = true;
     private boolean hasLoadedAllItems = false;
     private Paginate.Callbacks callbacks;
@@ -98,7 +100,6 @@ public class SearchResultsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_search_results, menu);
         return true;
     }
@@ -109,7 +110,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         loadingInProgress = true;
         Log.d("API", "Loading");
 
-        // Запрос выполняется асинхронно, также присутствует обработка ошибок
+        // Запрос выполняется асинхронно, также присутствует обработка ошибок.
         // Загружается конкретная страница результатов запроса
         App.getApi().getData(query, currentPage, PER_PAGE).enqueue(new Callback<GitHubUsersResponse>() {
             @Override

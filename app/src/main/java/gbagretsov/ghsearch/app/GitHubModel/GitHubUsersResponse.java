@@ -6,6 +6,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+/**
+ * Сгенерированный по JSON-схеме класс модели ответа
+ */
 public class GitHubUsersResponse {
 
     @SerializedName("total_count")

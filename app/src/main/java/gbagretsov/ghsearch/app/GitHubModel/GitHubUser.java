@@ -3,6 +3,9 @@ package gbagretsov.ghsearch.app.GitHubModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Сгенерированный по JSON-схеме класс модели пользователя
+ */
 public class GitHubUser {
 
     @SerializedName("login")

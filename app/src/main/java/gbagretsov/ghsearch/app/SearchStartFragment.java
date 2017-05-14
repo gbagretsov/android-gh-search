@@ -1,10 +1,8 @@
 package gbagretsov.ghsearch.app;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -19,30 +17,14 @@ import java.util.*;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SearchStartFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SearchStartFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Фрагмент-вкладка с параметрами поиска. Также содержит floating action button,
+ * по нажатию на которую и происходит поиск.
  */
 public class SearchStartFragment extends Fragment {
-
-    private OnFragmentInteractionListener mListener;
 
     private AutoCompleteTextView queryEditText; // Поле для ввода запроса
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment.
-     *
-     * @return A new instance of fragment SearchStartFragment.
-     */
-    public static SearchStartFragment newInstance() {
-        return new SearchStartFragment();
-    }
 
     public SearchStartFragment() {
         // Required empty public constructor
@@ -79,6 +61,8 @@ public class SearchStartFragment extends Fragment {
 
         String[] history = prefsCopy.keySet().toArray(new String[prefsCopy.values().size()]);
 
+        // В дополнение к показу вариантов при вводе символа добавлен listener на клик,
+        // чтобы выпадающий список показывался сразу же
         final ArrayAdapter<String> adapter = new ArrayAdapter<>
                 (getContext(), android.R.layout.simple_dropdown_item_1line, history);
         queryEditText.setAdapter(adapter);
@@ -90,39 +74,7 @@ public class SearchStartFragment extends Fragment {
         });
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-//        try {
-//            mListener = (OnFragmentInteractionListener) activity;
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException(activity.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Разобраться с интерфейсом
-        public void onFragmentInteraction(Uri uri);
-    }
-
-    // Обработка нажатия на floating action button
+    // Обработка нажатия на floating action button (сам listener устанавливается в методе onCreateView)
     private View.OnClickListener fabClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -143,7 +95,6 @@ public class SearchStartFragment extends Fragment {
             editor.apply();
 
             // Запускаем новую Activity и передаём запрос
-            // TODO: при возвращении текущая Activity создаётся заново
             Intent intent = new Intent(context, SearchResultsActivity.class);
             intent.putExtra(SearchResultsActivity.QUERY, q);
             startActivity(intent);
