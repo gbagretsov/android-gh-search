@@ -4,12 +4,13 @@
              android:layout_height="match_parent"
              tools:context="gbagretsov.ghsearch.app.SearchStartFragment">
 
-    <EditText
+    <AutoCompleteTextView
             android:id="@+id/query"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:inputType="textPersonName"
+            android:completionThreshold="1"
             android:hint="@string/enter_query"/>
 
     <android.support.design.widget.FloatingActionButton
