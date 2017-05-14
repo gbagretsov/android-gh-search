@@ -12,6 +12,8 @@ import android.view.ViewGroup;
  */
 public class FavouriteFragment extends Fragment {
 
+    public static String FAVOURITE = "gbagretsov.ghsearch.app.FAVOURITE";
+
     public FavouriteFragment() {
         // Required empty public constructor
     }

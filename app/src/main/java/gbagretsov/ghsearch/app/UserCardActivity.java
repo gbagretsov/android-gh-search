@@ -1,6 +1,7 @@
 package gbagretsov.ghsearch.app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
@@ -26,6 +27,10 @@ import retrofit2.Response;
 public class UserCardActivity extends AppCompatActivity {
 
     public static final String USER_LOGIN = "user_login";
+    SharedPreferences prefs;
+    boolean isFavourite; // Проверка, является ли текущий пользователь избранным
+    String login, avatarUrl;
+    ImageButton toggleFavourite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +47,11 @@ public class UserCardActivity extends AppCompatActivity {
 
         // Получаем переданный параметр
         Intent intent = getIntent();
-        final String login = intent.getStringExtra(USER_LOGIN);
+        login = intent.getStringExtra(USER_LOGIN);
+
+        // Проверяем, избранный ли пользователь
+        prefs = getSharedPreferences(FavouriteFragment.FAVOURITE, 0);
+        isFavourite = !prefs.getString(login, "").isEmpty();
 
         App.getApi().getUser(login).enqueue(new Callback<GitHubUser>() {
             @Override
@@ -64,6 +73,7 @@ public class UserCardActivity extends AppCompatActivity {
 
     private void showUserCard(GitHubUser user) {
         ImageView avatar = (ImageView) findViewById(R.id.user_card_avatar);
+        avatarUrl = user.getAvatarUrl();
         Picasso.with(getApplicationContext()).load(user.getAvatarUrl()).fit()
                 //.placeholder(R.drawable.user_placeholder) // TODO: placeholder
                 //.error(R.drawable.user_placeholder_error)
@@ -77,8 +87,11 @@ public class UserCardActivity extends AppCompatActivity {
         fullName.setText(user.getName());
         fullName.setSelected(true);
 
-        ImageButton toggleFavourite = (ImageButton) findViewById(R.id.btn_toggle_favourite);
-        setImageViewIconColor(toggleFavourite, R.color.icon_secondary, R.drawable.ic_favorite_white_24dp);
+        toggleFavourite = (ImageButton) findViewById(R.id.btn_toggle_favourite);
+        setImageViewIconColor( // В зависимости от того, избранный ли пользователь
+                toggleFavourite,
+                isFavourite ? R.color.accent : R.color.icon_secondary,
+                R.drawable.ic_favorite_white_24dp);
         toggleFavourite.setOnClickListener(toggleFavouriteClickListener);
 
         // Персональная информация, контакты
@@ -131,7 +144,19 @@ public class UserCardActivity extends AppCompatActivity {
     private View.OnClickListener toggleFavouriteClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            // TODO: проверять избранное
+            isFavourite = !isFavourite;
+
+            if (isFavourite) {
+                prefs.edit().putString(login, avatarUrl).apply(); // Храним адрес аватарки
+            } else {
+                prefs.edit().remove(login).apply();
+            }
+
+            // Меняем цвет
+            setImageViewIconColor(
+                    toggleFavourite,
+                    isFavourite ? R.color.accent : R.color.icon_secondary,
+                    R.drawable.ic_favorite_white_24dp);
         }
     };
 
