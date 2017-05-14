@@ -43,8 +43,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
                 .transform(new CircularTransformation(0))
                 .into(viewHolder.avatar);
         viewHolder.login.setText(user.getLogin());
-        // TODO: полное имя, количество репозиториев, followers
-        viewHolder.fullName.setText("Full name here");
     }
 
     @Override
@@ -56,13 +54,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
         private ImageView avatar;
         private TextView login;
-        private TextView fullName;
 
         public ViewHolder(View itemView) {
             super(itemView);
             avatar   = (ImageView) itemView.findViewById(R.id.user_avatar);
             login    = (TextView)  itemView.findViewById(R.id.user_login);
-            fullName = (TextView)  itemView.findViewById(R.id.full_name);
         }
     }
 

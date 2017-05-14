@@ -3,7 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="user_avatar_size">96dp</dimen>
+    <dimen name="user_avatar_size">40dp</dimen>
+    <dimen name="user_avatar_padding_vertical">8dp</dimen>
     <dimen name="user_login_text_size">16sp</dimen>
-    <dimen name="user_full_name_text_size">14sp</dimen>
 </resources>
