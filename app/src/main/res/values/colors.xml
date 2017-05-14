@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#3F4347</color>
+    <color name="primary_dark">#24292E</color>
+
+    <color name="accent">#2FC151</color>
+
+    <color name="text_color_toolbar">#FFF</color>
+    <color name="text_color_tab">#64ffffff</color>
+    <color name="text_color_selected_tab">#c8ffffff</color>
+</resources>
