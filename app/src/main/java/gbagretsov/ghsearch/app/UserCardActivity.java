@@ -1,11 +1,16 @@
 package gbagretsov.ghsearch.app;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
@@ -89,6 +94,10 @@ public class UserCardActivity extends AppCompatActivity {
         fullName.setText(user.getName());
         fullName.setSelected(true);
 
+        Button toggleFavourite = (Button) findViewById(R.id.btn_toggle_favourite);
+        setButtonColor(toggleFavourite, R.color.icon_secondary, R.drawable.ic_favorite_white_24dp);
+        toggleFavourite.setOnClickListener(toggleFavouriteClickListener);
+
         // Персональная информация, контакты
         TextView company = (TextView) findViewById(R.id.user_card_company);
         String s = user.getCompany();
@@ -125,6 +134,21 @@ public class UserCardActivity extends AppCompatActivity {
 
         // TODO: иконки
 
+    }
+
+    private View.OnClickListener toggleFavouriteClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // TODO: проверять избранное
+        }
+    };
+
+    private void setButtonColor(Button button, int color, int icon) {
+        Drawable drawable = this.getResources().getDrawable(icon);
+        assert drawable != null;
+        drawable.setColorFilter
+                (new PorterDuffColorFilter(getResources().getColor(color), PorterDuff.Mode.SRC_IN));
+        button.setBackground(drawable);
     }
 
     // Если количество больше 10 тыс., то последние три цифры меняем на "К"
