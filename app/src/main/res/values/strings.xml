@@ -12,5 +12,8 @@
     <string name="users_not_found">Your search did not match any users</string>
     <string name="title_activity_search_results">Search results</string>
     <string name="content_description_user_avatar">user avatar</string>
+
+    <!-- Карточка пользователя -->
+    <string name="title_activity_user_card">User card</string>
     
 </resources>

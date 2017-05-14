@@ -27,6 +27,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="gbagretsov.ghsearch.app.MainActivity" />
         </activity>
+        <activity
+            android:name=".UserCardActivity"
+            android:label="@string/title_activity_user_card"
+            android:parentActivityName=".SearchResultsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="gbagretsov.ghsearch.app.SearchResultsActivity" />
+        </activity>
     </application>
 
 </manifest>

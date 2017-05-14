@@ -1,6 +1,7 @@
 package gbagretsov.ghsearch.app.UsersDisplay;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import gbagretsov.ghsearch.app.GitHubModel.GitHubUser;
 import gbagretsov.ghsearch.app.R;
+import gbagretsov.ghsearch.app.UserCardActivity;
 
 import java.util.List;
 
@@ -59,6 +61,20 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
             super(itemView);
             avatar   = (ImageView) itemView.findViewById(R.id.user_avatar);
             login    = (TextView)  itemView.findViewById(R.id.user_login);
+
+            // По нажатию на элемент списка вызываем экран с карточкой пользователя
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    final Context context = v.getContext();
+
+                    // Запускаем новую Activity и передаём запрос
+                    Intent intent = new Intent(context, UserCardActivity.class);
+                    intent.putExtra(UserCardActivity.USER_LOGIN, login.getText().toString());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 
