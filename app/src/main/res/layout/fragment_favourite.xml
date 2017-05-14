@@ -4,9 +4,9 @@
              android:layout_height="match_parent"
              tools:context="gbagretsov.ghsearch.app.SearchStartFragment">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/tab_favourite"/>
+            android:id="@+id/favourite_recycle_view" />
 
 </FrameLayout>
