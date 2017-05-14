@@ -9,5 +9,6 @@ import retrofit2.http.Query;
  */
 public interface GitHubApi {
     @GET("/search/users")
-    Call<GitHubUsersResponse> getData(@Query("q") String query);
+    Call<GitHubUsersResponse> getData
+            (@Query("q") String query, @Query("page") int currentPage, @Query("per_page") int perPage);
 }
