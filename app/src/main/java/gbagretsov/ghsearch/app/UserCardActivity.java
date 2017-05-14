@@ -10,11 +10,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import gbagretsov.ghsearch.app.GitHubModel.GitHubUser;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Класс, отрисовывающий карточки пользователя
@@ -40,27 +44,6 @@ public class UserCardActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final String login = intent.getStringExtra(USER_LOGIN);
 
-        GitHubUser stub = new GitHubUser();
-        stub.setAvatarUrl("https://avatars1.githubusercontent.com/u/9006613?v=3");
-
-        stub.setLogin("gbagretsov");
-        stub.setName("Georgiy Bagretsov");
-        stub.setType("User");
-
-        // Personal info
-        stub.setCompany("Microsoft google");
-        stub.setLocation("Saint-Petersburg");
-        stub.setEmail("mysecretmail@mail.com");
-        stub.setBlog("https://facebook.com");
-
-        // stats
-        stub.setPublicRepos(10123);
-        stub.setPublicGists(9999);
-        stub.setFollowers(200000);
-
-        showUserCard(stub);
-        // TODO: включить потом
-        /*
         App.getApi().getUser(login).enqueue(new Callback<GitHubUser>() {
             @Override
             public void onResponse(Call<GitHubUser> call, Response<GitHubUser> response) {
@@ -76,7 +59,7 @@ public class UserCardActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), getText(R.string.error_occured), Toast.LENGTH_SHORT).show();
                 // TODO: попробовать снова
             }
-        });*/
+        });
     }
 
     private void showUserCard(GitHubUser user) {
@@ -94,8 +77,8 @@ public class UserCardActivity extends AppCompatActivity {
         fullName.setText(user.getName());
         fullName.setSelected(true);
 
-        Button toggleFavourite = (Button) findViewById(R.id.btn_toggle_favourite);
-        setButtonColor(toggleFavourite, R.color.icon_secondary, R.drawable.ic_favorite_white_24dp);
+        ImageButton toggleFavourite = (ImageButton) findViewById(R.id.btn_toggle_favourite);
+        setImageViewIconColor(toggleFavourite, R.color.icon_secondary, R.drawable.ic_favorite_white_24dp);
         toggleFavourite.setOnClickListener(toggleFavouriteClickListener);
 
         // Персональная информация, контакты
@@ -132,7 +115,16 @@ public class UserCardActivity extends AppCompatActivity {
         followers.setText(shortenNumericString(user.getFollowers()));
         followers.setSelected(true);
 
-        // TODO: иконки
+        // Иконки
+        ImageView iconCompany  = (ImageView) findViewById(R.id.icon_user_card_company);
+        ImageView iconLocation = (ImageView) findViewById(R.id.icon_user_card_location);
+        ImageView iconEmail    = (ImageView) findViewById(R.id.icon_user_card_email);
+        ImageView iconblog     = (ImageView) findViewById(R.id.icon_user_card_blog);
+
+        setImageViewIconColor(iconCompany,  R.color.primary, R.drawable.ic_worker);
+        setImageViewIconColor(iconLocation, R.color.primary, R.drawable.ic_location_on_white_24dp);
+        setImageViewIconColor(iconEmail,    R.color.primary, R.drawable.ic_email_white_24dp);
+        setImageViewIconColor(iconblog,     R.color.primary, R.drawable.ic_link_variant);
 
     }
 
@@ -143,12 +135,12 @@ public class UserCardActivity extends AppCompatActivity {
         }
     };
 
-    private void setButtonColor(Button button, int color, int icon) {
+    private void setImageViewIconColor(ImageView view, int color, int icon) {
         Drawable drawable = this.getResources().getDrawable(icon);
         assert drawable != null;
         drawable.setColorFilter
                 (new PorterDuffColorFilter(getResources().getColor(color), PorterDuff.Mode.SRC_IN));
-        button.setBackground(drawable);
+        view.setImageDrawable(drawable);
     }
 
     // Если количество больше 10 тыс., то последние три цифры меняем на "К"

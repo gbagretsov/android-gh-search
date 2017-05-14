@@ -15,6 +15,7 @@
             app:popupTheme="@style/AppTheme"
             app:titleTextColor="@color/text_color_toolbar"/>
 
+    <!-- Общая информация -->
     <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/user_card_view"
@@ -99,8 +100,9 @@
                 android:focusableInTouchMode="true"
                 android:freezesText="true"/>
 
-        <Button
+        <ImageButton
                 android:id="@+id/btn_toggle_favourite"
+                android:contentDescription="@string/set_favourite"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:background="@drawable/ic_favorite_white_24dp"
@@ -111,32 +113,35 @@
 
     </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/user_personal_info_card_view"
-            android:layout_below="@id/user_card_view"
-
-            android:layout_marginTop="@dimen/padding_small"
-            android:layout_marginLeft="@dimen/padding_small"
-            android:layout_marginStart="@dimen/padding_small"
-            android:layout_marginRight="@dimen/padding_small"
-            android:layout_marginEnd="@dimen/padding_small"
-
-            android:layout_width="@dimen/personal_info_card_width"
+    <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="2dp"
-            card_view:cardCornerRadius="2dp">
+            android:layout_margin="0dp"
+            android:orientation="horizontal"
+            android:layout_below="@id/user_card_view">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                        xmlns:tools="http://schemas.android.com/tools"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
-                        tools:context="gbagretsov.ghsearch.app.UserCardActivity">
+        <!-- Статистика -->
+        <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/user_stats_card_view"
+                android:layout_below="@id/user_card_view"
+                card_view:cardBackgroundColor="@color/accent"
+
+                android:layout_marginTop="@dimen/padding_small"
+                android:layout_marginLeft="@dimen/padding_small"
+                android:layout_marginStart="@dimen/padding_small"
+
+                android:layout_width="@dimen/stats_card_width"
+                android:layout_height="match_parent"
+                android:elevation="2dp"
+                card_view:cardCornerRadius="2dp">
 
             <TextView
+                    android:text="@string/user_stats_repositories"
 
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
 
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -147,16 +152,15 @@
                     android:layout_marginTop="24dp"
 
                     android:textColor="@color/text_color_primary"
-                    android:textSize="@dimen/primary_text_size"
-                    android:textStyle="normal"
-
-                    android:text="@string/personal_info"/>
+                    android:textSize="@dimen/secondary_text_size"
+                    android:textStyle="normal"/>
 
             <TextView
-                    android:id="@+id/user_card_company"
+                    android:id="@+id/user_card_public_repos"
 
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
 
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -164,24 +168,19 @@
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:layout_marginEnd="@dimen/activity_horizontal_margin"
 
-                    android:layout_marginTop="64dp"
+                    android:layout_marginTop="38dp"
 
-                    android:textColor="@color/text_color_secondary"
-                    android:textSize="@dimen/secondary_text_size"
-                    android:textStyle="normal"
-
-                    android:singleLine="true"
-                    android:ellipsize="marquee"
-                    android:marqueeRepeatLimit="marquee_forever"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:freezesText="true"/>
+                    android:textColor="@color/text_color_primary"
+                    android:textSize="@dimen/stats_text_size"
+                    android:textStyle="bold"/>
 
             <TextView
-                    android:id="@+id/user_card_location"
+                    android:text="@string/user_stats_gists"
 
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
 
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -189,25 +188,19 @@
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:layout_marginEnd="@dimen/activity_horizontal_margin"
 
-                    android:layout_marginTop="16dp"
-                    android:layout_below="@id/user_card_company"
+                    android:layout_marginBottom="16dp"
 
-                    android:textColor="@color/text_color_secondary"
+                    android:textColor="@color/text_color_primary"
                     android:textSize="@dimen/secondary_text_size"
-                    android:textStyle="normal"
-
-                    android:singleLine="true"
-                    android:ellipsize="marquee"
-                    android:marqueeRepeatLimit="marquee_forever"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:freezesText="true"/>
+                    android:textStyle="normal"/>
 
             <TextView
-                    android:id="@+id/user_card_email"
+                    android:id="@+id/user_card_public_gists"
 
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
 
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -215,25 +208,19 @@
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:layout_marginEnd="@dimen/activity_horizontal_margin"
 
-                    android:layout_marginTop="16dp"
-                    android:layout_below="@id/user_card_location"
+                    android:layout_marginTop="4dp"
 
-                    android:textColor="@color/text_color_secondary"
-                    android:textSize="@dimen/secondary_text_size"
-                    android:textStyle="normal"
-
-                    android:singleLine="true"
-                    android:ellipsize="marquee"
-                    android:marqueeRepeatLimit="marquee_forever"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:freezesText="true"/>
+                    android:textColor="@color/text_color_primary"
+                    android:textSize="@dimen/stats_text_size"
+                    android:textStyle="bold"/>
 
             <TextView
-                    android:id="@+id/user_card_blog"
+                    android:text="@string/user_stats_followers"
 
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="bottom"
 
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -241,97 +228,230 @@
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:layout_marginEnd="@dimen/activity_horizontal_margin"
 
-                    android:layout_marginTop="16dp"
-                    android:layout_below="@id/user_card_email"
-                    android:paddingBottom="24dp"
+                    android:layout_marginBottom="50dp"
 
-                    android:textColor="@color/text_color_secondary"
+                    android:textColor="@color/text_color_primary"
                     android:textSize="@dimen/secondary_text_size"
-                    android:textStyle="normal"
+                    android:textStyle="normal"/>
 
-                    android:singleLine="true"
-                    android:ellipsize="marquee"
-                    android:marqueeRepeatLimit="marquee_forever"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:freezesText="true"/>
+            <TextView
+                    android:id="@+id/user_card_followers"
 
-        </RelativeLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="bottom"
 
-    </android.support.v7.widget.CardView>
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
 
-    <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/user_stats_card_view"
-            android:layout_toRightOf="@id/user_personal_info_card_view"
-            android:layout_below="@id/user_card_view"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
 
-            android:layout_marginTop="@dimen/padding_small"
-            android:layout_marginRight="@dimen/padding_small"
-            android:layout_marginEnd="@dimen/padding_small"
+                    android:layout_marginBottom="24dp"
 
-            android:layout_width="match_parent"
-            android:layout_height="208dp"
-            android:elevation="2dp"
-            card_view:cardCornerRadius="2dp">
+                    android:textColor="@color/text_color_primary"
+                    android:textSize="@dimen/stats_text_size"
+                    android:textStyle="bold"/>
 
-        <TextView
-                android:id="@+id/user_card_public_repos"
+        </android.support.v7.widget.CardView>
+
+        <!-- Личные данные -->
+        <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/user_personal_info_card_view"
+                android:layout_below="@id/user_card_view"
+                android:layout_toRightOf="@id/user_stats_card_view"
+                android:layout_toEndOf="@id/user_stats_card_view"
+
+                android:layout_marginTop="@dimen/padding_small"
+                android:layout_marginLeft="@dimen/padding_small"
+                android:layout_marginStart="@dimen/padding_small"
+                android:layout_marginRight="@dimen/padding_small"
+                android:layout_marginEnd="@dimen/padding_small"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:elevation="2dp"
+                card_view:cardCornerRadius="2dp">
 
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+                            tools:context="gbagretsov.ghsearch.app.UserCardActivity">
 
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                <TextView
 
-                android:layout_marginTop="24dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
 
-                android:textColor="@color/text_color_primary"
-                android:textSize="@dimen/stats_text_size"
-                android:textStyle="normal"/>
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginStart="@dimen/activity_horizontal_margin"
 
-        <TextView
-                android:id="@+id/user_card_public_gists"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_gravity="center_vertical"
+                        android:layout_marginTop="24dp"
 
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                        android:textColor="@color/text_color_primary"
+                        android:textSize="@dimen/primary_text_size"
+                        android:textStyle="normal"
 
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:text="@string/personal_info"/>
 
-                android:textColor="@color/text_color_primary"
-                android:textSize="@dimen/stats_text_size"
-                android:textStyle="normal"/>
+                <!-- Компания -->
+                <TextView
+                        android:id="@+id/user_card_company"
 
-        <TextView
-                android:id="@+id/user_card_followers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_gravity="bottom"
+                        android:layout_marginLeft="48dp"
+                        android:layout_marginStart="48dp"
 
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
 
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:layout_marginTop="64dp"
 
-                android:layout_marginBottom="24dp"
+                        android:textColor="@color/text_color_secondary"
+                        android:textSize="@dimen/secondary_text_size"
+                        android:textStyle="normal"
 
-                android:textColor="@color/text_color_primary"
-                android:textSize="@dimen/stats_text_size"
-                android:textStyle="normal"/>
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"/>
 
-    </android.support.v7.widget.CardView>
+                <!-- Местоположение -->
+                <TextView
+                        android:id="@+id/user_card_location"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginLeft="48dp"
+                        android:layout_marginStart="48dp"
+
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+
+                        android:layout_marginTop="16dp"
+                        android:layout_below="@id/user_card_company"
+
+                        android:textColor="@color/text_color_secondary"
+                        android:textSize="@dimen/secondary_text_size"
+                        android:textStyle="normal"
+
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"/>
+
+                <!-- Электронная почта -->
+                <TextView
+                        android:id="@+id/user_card_email"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginLeft="48dp"
+                        android:layout_marginStart="48dp"
+
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+
+                        android:layout_marginTop="16dp"
+                        android:layout_below="@id/user_card_location"
+
+                        android:textColor="@color/text_color_secondary"
+                        android:textSize="@dimen/secondary_text_size"
+                        android:textStyle="normal"
+
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"/>
+
+                <!-- Блог -->
+                <TextView
+                        android:id="@+id/user_card_blog"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginLeft="48dp"
+                        android:layout_marginStart="48dp"
+
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+
+                        android:layout_marginTop="16dp"
+                        android:layout_below="@id/user_card_email"
+                        android:paddingBottom="24dp"
+
+                        android:textColor="@color/text_color_secondary"
+                        android:textSize="@dimen/secondary_text_size"
+                        android:textStyle="normal"
+
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"/>
+
+                <!-- Иконки -->
+                <ImageView
+                        android:id="@+id/icon_user_card_company"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginStart="@dimen/activity_horizontal_margin"
+                        android:layout_marginTop="60dp"
+                        android:src="@drawable/ic_worker"/>
+
+                <ImageView
+                        android:id="@+id/icon_user_card_location"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginStart="@dimen/activity_horizontal_margin"
+                        android:layout_marginTop="8dp"
+                        android:layout_below="@id/icon_user_card_company"
+                        android:src="@drawable/ic_location_on_white_24dp"/>
+
+                <ImageView
+                        android:id="@+id/icon_user_card_email"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginStart="@dimen/activity_horizontal_margin"
+                        android:layout_marginTop="8dp"
+                        android:layout_below="@id/icon_user_card_location"
+                        android:src="@drawable/ic_email_white_24dp"/>
+
+                <ImageView
+                        android:id="@+id/icon_user_card_blog"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginStart="@dimen/activity_horizontal_margin"
+                        android:layout_marginTop="8dp"
+                        android:layout_below="@id/icon_user_card_email"
+                        android:src="@drawable/ic_link_variant"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
 
 </RelativeLayout>

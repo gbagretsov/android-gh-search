@@ -18,5 +18,9 @@
     <string name="personal_info">Personal info</string>
     <string name="not_specified">Not specified</string>
     <string name="not_available">Not available</string>
-    
+    <string name="set_favourite">Set favourite</string>
+    <string name="user_stats_repositories">Repos</string>
+    <string name="user_stats_gists">Gists</string>
+    <string name="user_stats_followers">Followers</string>
+
 </resources>
