@@ -15,5 +15,6 @@
 
     <!-- Карточка пользователя -->
     <string name="title_activity_user_card">User card</string>
+    <string name="personal_info">Personal info</string>
     
 </resources>
