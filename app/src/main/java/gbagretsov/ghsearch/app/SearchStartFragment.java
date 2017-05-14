@@ -2,20 +2,16 @@ package gbagretsov.ghsearch.app;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
-import gbagretsov.ghsearch.app.GitHubModel.GitHubUsersResponse;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 /**
@@ -31,7 +27,6 @@ public class SearchStartFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private EditText queryEditText; // Поле для ввода запроса
-
     /**
      * Use this factory method to create a new instance of
      * this fragment.
@@ -110,27 +105,11 @@ public class SearchStartFragment extends Fragment {
                 return;
             }
 
-            // Выполняем запрос
-            // TODO: перенести выполнение запроса в новую Activity
-            App.getApi().getData(q).enqueue(new Callback<GitHubUsersResponse>() {
-                @Override
-                public void onResponse(Call<GitHubUsersResponse> call, Response<GitHubUsersResponse> response) {
-                    // TODO: Данные успешно пришли, но надо проверить response.body() на null
-                    if (response.body() != null &&
-                            response.body().getGitHubUsers() != null &&
-                           !response.body().getGitHubUsers().isEmpty()) {
-                        Log.d("API", response.body().getGitHubUsers().get(0).getLogin());
-                    } else {
-                        // Ничего не найдено
-                        Toast.makeText(context, getText(R.string.users_not_found), Toast.LENGTH_LONG).show();
-                    }
-                }
-                @Override
-                public void onFailure(Call<GitHubUsersResponse> call, Throwable t) {
-                    // Произошла ошибка
-                    Toast.makeText(context, getText(R.string.error_occured), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Запускаем новую Activity и передаём запрос
+            // TODO: при возвращении текущая Activity создаётся заново
+            Intent intent = new Intent(context, SearchResultsActivity.class);
+            intent.putExtra(SearchResultsActivity.QUERY, q);
+            startActivity(intent);
 
         }
     };

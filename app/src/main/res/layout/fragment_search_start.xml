@@ -8,7 +8,7 @@
             android:id="@+id/query"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/activity_horizontal_margin"
             android:inputType="textPersonName"
             android:hint="@string/enter_query"/>
 
@@ -18,6 +18,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:src="@drawable/ic_search_white_24dp"
-            android:layout_margin="16dp" />
+            android:layout_margin="@dimen/activity_horizontal_margin" />
 
 </FrameLayout>

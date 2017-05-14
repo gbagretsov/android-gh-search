@@ -10,5 +10,7 @@
     <string name="query_is_empty">Query is empty</string>
     <string name="error_occured">An error has occurred</string>
     <string name="users_not_found">Your search did not match any users</string>
-
+    <string name="title_activity_search_results">Search results</string>
+    <string name="content_description_user_avatar">user avatar</string>
+    
 </resources>
