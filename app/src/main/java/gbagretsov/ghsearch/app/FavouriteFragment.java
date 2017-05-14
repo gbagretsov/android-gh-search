@@ -48,17 +48,7 @@ public class FavouriteFragment extends Fragment {
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        // Получаем избранных пользователей
-        prefs = view.getContext().getSharedPreferences(FAVOURITE, 0);
-        favouriteUsers = (HashMap<String, String>) prefs.getAll();
-
         usersList = new ArrayList<>();
-        for (String s : favouriteUsers.keySet()) {
-            GitHubUser gitHubUser = new GitHubUser();
-            gitHubUser.setLogin(s);
-            gitHubUser.setAvatarUrl(favouriteUsers.get(s));
-            usersList.add(gitHubUser);
-        }
 
         UsersAdapter adapter = new UsersAdapter(usersList, getActivity());
         recyclerView.setAdapter(adapter);
@@ -72,13 +62,13 @@ public class FavouriteFragment extends Fragment {
         // Заново создаём список
         prefs = getActivity().getSharedPreferences(FAVOURITE, 0);
         favouriteUsers = (HashMap<String, String>) prefs.getAll();
-        usersList = new ArrayList<>();
+        usersList.clear();
         for (String s : favouriteUsers.keySet()) {
             GitHubUser gitHubUser = new GitHubUser();
             gitHubUser.setLogin(s);
             gitHubUser.setAvatarUrl(favouriteUsers.get(s));
             usersList.add(gitHubUser);
         }
-        // TODO: список не обновляется
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 }
