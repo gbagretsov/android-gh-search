@@ -7,6 +7,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+import gbagretsov.ghsearch.app.GitHubModel.GitHubUser;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class UserCardActivity extends AppCompatActivity {
 
@@ -28,7 +32,28 @@ public class UserCardActivity extends AppCompatActivity {
         // Получаем переданный параметр
         Intent intent = getIntent();
         final String login = intent.getStringExtra(USER_LOGIN);
-        Toast.makeText(this, login, Toast.LENGTH_SHORT).show();
+
+        App.getApi().getUser(login).enqueue(new Callback<GitHubUser>() {
+            @Override
+            public void onResponse(Call<GitHubUser> call, Response<GitHubUser> response) {
+                // Данные успешно пришли, но надо проверить response.body() на null
+                if (response.body() != null) {
+                    showUserCard(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GitHubUser> call, Throwable t) {
+                // Произошла ошибка
+                Toast.makeText(getApplicationContext(), getText(R.string.error_occured), Toast.LENGTH_SHORT).show();
+                // TODO: попробовать снова
+            }
+        });
+    }
+
+    private void showUserCard(GitHubUser user) {
+        // TODO: показывать карточку
+        Toast.makeText(this, user.getLogin(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
