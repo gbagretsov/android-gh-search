@@ -1,21 +1,19 @@
 package gbagretsov.ghsearch.app;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import gbagretsov.ghsearch.app.GitHubModel.GitHubUser;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
+/**
+ * Класс, отрисовывающий карточки пользователя
+ */
 public class UserCardActivity extends AppCompatActivity {
 
     public static final String USER_LOGIN = "user_login";
@@ -51,9 +49,9 @@ public class UserCardActivity extends AppCompatActivity {
         stub.setBlog("https://facebook.com");
 
         // stats
-        stub.setFollowers(20);
-        stub.setPublicRepos(10);
-        stub.setPublicGists(5);
+        stub.setPublicRepos(10123);
+        stub.setPublicGists(9999);
+        stub.setFollowers(200000);
 
         showUserCard(stub);
         // TODO: включить потом
@@ -92,25 +90,50 @@ public class UserCardActivity extends AppCompatActivity {
         fullName.setSelected(true);
 
         // Персональная информация, контакты
-
         TextView company = (TextView) findViewById(R.id.user_card_company);
-        company.setText(user.getCompany());
+        String s = user.getCompany();
+        company.setText(s == null || s.isEmpty() ? getString(R.string.not_specified) : s);
         company.setSelected(true);
 
         TextView location = (TextView) findViewById(R.id.user_card_location);
-        location.setText(user.getLocation());
+        s = user.getLocation();
+        location.setText(s == null || s.isEmpty() ? getString(R.string.not_specified) : s);
         location.setSelected(true);
 
         TextView email = (TextView) findViewById(R.id.user_card_email);
-        email.setText(user.getEmail());
+        s = user.getEmail();
+        email.setText(s == null || s.isEmpty() ? getString(R.string.not_available) : s);
         email.setSelected(true);
 
         TextView blog = (TextView) findViewById(R.id.user_card_blog);
-        blog.setText(user.getBlog());
+        s = user.getBlog();
+        blog.setText(s == null || s.isEmpty() ? getString(R.string.not_specified) : s);
         blog.setSelected(true);
 
-        // TODO: статистика, иконки
+        // Статистика
+        TextView publicRepos = (TextView) findViewById(R.id.user_card_public_repos);
+        publicRepos.setText(shortenNumericString(user.getPublicRepos()));
+        publicRepos.setSelected(true);
 
+        TextView publicGists = (TextView) findViewById(R.id.user_card_public_gists);
+        publicGists.setText(shortenNumericString(user.getPublicGists()));
+        publicGists.setSelected(true);
+
+        TextView followers = (TextView) findViewById(R.id.user_card_followers);
+        followers.setText(shortenNumericString(user.getFollowers()));
+        followers.setSelected(true);
+
+        // TODO: иконки
+
+    }
+
+    // Если количество больше 10 тыс., то последние три цифры меняем на "К"
+    private String shortenNumericString(int n) {
+        if (n >= 10000) {
+            return String.valueOf(n).substring(0, String.valueOf(n).length() - 3).concat("K");
+        } else {
+            return String.valueOf(n);
+        }
     }
 
     @Override
